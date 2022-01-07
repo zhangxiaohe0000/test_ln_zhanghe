@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vuejs/vuejs-2.5.16.js"></script>
+    <script type="text/javascript" src="../vuejs/axios-0.18.0.js"></script>
+</head>
+<body>
+    <center>
+        <div id="orderListDiv">
+            <h1>体检预约管理系统</h1>
+            <table border="1" rules="all" width="1100px" style="text-align: center">
+                <tr>
+                    <td colspan="100">
+                        <button @click="inserOrder()">预约</button>
+                        <button @click="refresh()">页面刷新</button>
+                        体检日期：<select v-model="orderEntity.otime">
+                                    <option v-for="ot in oTimeList">{{ot.otime}}</option>
+                                </select>
+                        套餐价格：<input type="number" v-model="orderEntity.minSprice">
+                        :<input type="number" v-model="orderEntity.maxSprice">
+                        用户名称：<input type="text" v-model="orderEntity.uname">
+                        <button @click="getOrderList()">查询</button>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="checkbox">
+                    </th>
+                    <th>订单ID</th>
+                    <th>用户名称</th>
+                    <th>用户性别</th>
+                    <th>联系方式</th>
+                    <th>省份证号</th>
+                    <th>套餐名称</th>
+                    <th>套餐价格</th>
+                    <th>体检日期</th>
+                    <th>体检状态</th>
+                    <th>具体时间段</th>
+                </tr>
+                <tr v-for="o in oList">
+                    <td>
+                        <input type="checkbox">
+                    </td>
+                    <td>{{o.oid}}</td>
+                    <td>{{o.uname}}</td>
+                    <td>{{o.usex}}</td>
+                    <td>{{o.uphone}}</td>
+                    <td>{{o.uidcard}}</td>
+                    <td>{{o.sname}}</td>
+                    <td>{{o.sprice}}</td>
+                    <td>{{o.otime}}</td>
+                    <td>{{o.oinspectstatus}}</td>
+                    <td>{{o.timesection}}</td>
+                </tr>
+            </table>
+        </div>
+    </center>
+</body>
+<script type="text/javascript" src="../myjs/order_list.js"></script>
+</html>

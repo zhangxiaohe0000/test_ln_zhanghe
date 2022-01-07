@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lening.mapper.InspectMapper">
+    <select id="findOrderList" resultType="com.lening.entity.Inspect">
+        SELECT
+            tor.oid,
+            tu.uname,
+            tu.usex,
+            tu.uphone,
+            tu.uidcard,
+            ts.sname,
+            ts.sprice,
+            tor.otime,
+            tor.oinspectstatus,
+            tt.timesection
+        FROM
+            t_order tor
+        LEFT JOIN t_setmeal ts ON tor.sid = ts.sid
+        LEFT JOIN t_user tu ON tor.uid = tu.uid
+        LEFT JOIN t_timesection tt ON tor.tid = tt.tid
+        <where>
+            <if test="uname!=null and uname!=''">
+                tu.uname like concat('%',#{uname},'%')
+            </if>
+            <if test="minSprice!=null and minSprice!='' and maxSprice!=null and maxSprice!=''">
+                and ts.sprice BETWEEN #{minSprice} and #{maxSprice}
+            </if>
+            <if test="otime!=null and otime!=''">
+                and tor.otime=#{otime}
+            </if>
+        </where>
+    </select>
+    
+    <select id="findOtime" resultType="com.lening.entity.Inspect">
+        SELECT otime from t_order
+    </select>
+    
+    <select id="findTimesection" resultType="com.lening.entity.Inspect">
+        SELECT * from t_timesection
+    </select>
+
+    <select id="findSetmeal" resultType="com.lening.entity.Inspect">
+        SELECT * from t_setmeal
+    </select>
+
+    <select id="findOprice" resultType="com.lening.entity.Inspect">
+        SELECT * from t_setmeal where sid={value}
+    </select>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="uid">
+        INSERT INTO `inspect_bodydb`.`t_user` (
+            `uid`,
+            `uname`,
+            `uage`,
+            `usex`,
+            `uphone`,
+            `uidcard`,
+            `ucreattime`
+        )
+        VALUES
+            (
+                #{uid},
+                #{uname},
+                #{uage},
+                #{usex},
+                #{uphone},
+                #{uidcard},
+                #{ucreattime}
+            );
+    </insert>
+    <insert id="insertOrder">
+        INSERT INTO `inspect_bodydb`.`t_order` (
+            `uid`,
+            `ostatus`,
+            `sid`,
+            `oprice`,
+            `oinspectstatus`,
+            `otime`,
+            `tid`
+        )
+        VALUES
+            (
+                #{uid},
+                '订单完成',
+                #{sid},
+                #{oprice},
+                '已检验',
+                '2021-12-23',
+                #{tid}
+            );
+    </insert>
+</mapper>

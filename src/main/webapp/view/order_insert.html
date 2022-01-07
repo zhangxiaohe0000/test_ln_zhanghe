@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="../vuejs/vuejs-2.5.16.js"></script>
+    <script type="text/javascript" src="../vuejs/axios-0.18.0.js"></script>
+</head>
+<body>
+    <center>
+        <div id="orderInsertDiv">
+            <h2>你好</h2>
+            <table border="1" rules="all" style="width: 400px">
+                <tr>
+                    <td>用户姓名</td>
+                    <td>
+                        <input type="text" v-model="insertOrderEntity.uname">
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户性别</td>
+                    <td>
+                        <input type="radio" v-model="insertOrderEntity.usex" name="sex" value="男">男
+                        <input type="radio" v-model="insertOrderEntity.usex" name="sex" value="女">女
+                    </td>
+                </tr>
+                <tr>
+                    <td>用户年龄</td>
+                    <td>
+                        <input type="number" v-model="insertOrderEntity.uage">
+                    </td>
+                </tr>
+                <tr>
+                    <td>预约时间</td>
+                    <td>
+                        <input type="date" v-model="insertOrderEntity.ucreattime">
+                    </td>
+                </tr>
+                <tr>
+                    <td>具体时间段</td>
+                    <td>
+                        <select v-model="insertOrderEntity.tid">
+                            <option v-for="t in tList" :value="t.tid">{{t.timesection}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>联系方式</td>
+                    <td>
+                        <input type="text" v-model="insertOrderEntity.uphone">
+                    </td>
+                </tr>
+                <tr>
+                    <td>身份证号</td>
+                    <td>
+                        <input type="text" v-model="insertOrderEntity.uidcard">
+                    </td>
+                </tr>
+                <tr>
+                    <td>套餐名称</td>
+                    <td>
+                        <select v-model="insertOrderEntity.sid">
+                            <option v-for="s in sList" :value="s.sid">{{s.sname}}</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="100" align="right">
+                        <button @click="insertOrder()">保存</button>
+                        <button @click="closeOrderInsertDiv()">关闭</button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </center>
+</body>
+<script type="text/javascript" src="../myjs/order_insert.js"></script>
+</html>

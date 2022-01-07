@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///inspect_bodydb?serverTimezone=UTC
+    username: root
+    password: root
+    type: com.alibaba.druid.pool.DruidDataSource
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+mybatis:
+  mapper-locations: mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+  type-aliases-package: com.lening.entity
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+
+
